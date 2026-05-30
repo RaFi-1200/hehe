@@ -10,14 +10,13 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      - name: Debug File Structure
+        run: ls -R  # এটি রিপোজিটরির ভেতরের সব ফাইল ও ফোল্ডার দেখাবে
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-
-      # এখানে আমরা নিশ্চিত করছি যে আমরা সঠিক ফোল্ডারে আছি
-      - name: List Files
-        run: ls -la
 
       - name: Install dependencies
         run: npm install
