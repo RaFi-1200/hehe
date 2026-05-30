@@ -3,15 +3,18 @@ on:
   push:
     branches:
       - main
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    # এই অংশটি যোগ করা হয়েছে:
+    defaults:
+      run:
+        working-directory: my-apps
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-
-      - name: Debug File Structure
-        run: ls -R  # এটি রিপোজিটরির ভেতরের সব ফাইল ও ফোল্ডার দেখাবে
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -36,4 +39,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: app-debug
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          path: my-apps/android/app/build/outputs/apk/debug/app-debug.apk
