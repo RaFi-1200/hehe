@@ -1,0 +1,6 @@
+{
+  "appId": "com.gpacalculator.app",
+  "appName": "GPA Calculator",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}
