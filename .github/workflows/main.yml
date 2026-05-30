@@ -3,30 +3,28 @@ on:
   push:
     branches:
       - main
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: my-apps
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-
-      # ফাইল স্ট্রাকচার চেক করি যাতে আমরা জানি কোথায় আছি
-      - name: Debug File Structure
-        run: ls -R
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      # package.json যেখানেই থাকুক, এই কমান্ডটি তা খুঁজে নেবে
       - name: Install dependencies
-        run: |
-          find . -name "package.json" -exec dirname {} \; | xargs -I {} npm install --prefix {}
+        run: npm install
 
       - name: Build Web
-        run: |
-          find . -name "package.json" -exec dirname {} \; | xargs -I {} npm run build --prefix {}
+        run: npm run build
 
       - name: Grant Permission for Gradle
         run: |
@@ -42,4 +40,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: app-debug
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          path: my-apps/android/app/build/outputs/apk/debug/app-debug.apk
